@@ -68,6 +68,6 @@ bin/*
 Properties/*
 
 
-/BankApp/bin/Debug
-/BankApp/obj/Debug
+/BankApp/bin/*
+/BankApp/obj/*
 /BankApp/Properties/*
