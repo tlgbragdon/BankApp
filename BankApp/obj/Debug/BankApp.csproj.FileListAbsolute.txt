@@ -1,11 +1,14 @@
-D:\source\repos\BankApp\BankApp\bin\Debug\BankApp.exe.config
-D:\source\repos\BankApp\BankApp\bin\Debug\BankApp.exe
 D:\source\repos\BankApp\BankApp\bin\Debug\BankApp.pdb
 D:\source\repos\BankApp\BankApp\obj\Debug\BankApp.csprojResolveAssemblyReference.cache
 D:\source\repos\BankApp\BankApp\obj\Debug\BankApp.csproj.CoreCompileInputs.cache
-D:\source\repos\BankApp\BankApp\obj\Debug\BankApp.exe
 D:\source\repos\BankApp\BankApp\obj\Debug\BankApp.pdb
 D:\source\repos\BankApp\BankApp\bin\Debug\EntityFramework.dll
 D:\source\repos\BankApp\BankApp\bin\Debug\EntityFramework.SqlServer.dll
 D:\source\repos\BankApp\BankApp\bin\Debug\EntityFramework.xml
 D:\source\repos\BankApp\BankApp\bin\Debug\EntityFramework.SqlServer.xml
+D:\source\repos\BankApp\BankApp\obj\Debug\BankApp.Migrations.InitialCreate.resources
+D:\source\repos\BankApp\BankApp\obj\Debug\BankApp.csproj.GenerateResource.Cache
+D:\source\repos\BankApp\BankApp\obj\Debug\BankApp.Migrations.Transactions.resources
+D:\source\repos\BankApp\BankApp\bin\Debug\BankApp.dll.config
+D:\source\repos\BankApp\BankApp\bin\Debug\BankApp.dll
+D:\source\repos\BankApp\BankApp\obj\Debug\BankApp.dll

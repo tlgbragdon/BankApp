@@ -9,7 +9,6 @@ namespace BankApp
     public static class Bank
     {
         private static BankModel db = new BankModel();  // this opens connection to our db
-        private static List<Account> accounts = new List<Account>();
         /// <summary>
         /// Bank creates an account for user
         /// </summary>
@@ -45,5 +44,80 @@ namespace BankApp
             // as this returns a reference to the data which could end up being changed
             return db.Accounts.Where(a => a.EmailAddress == emailAddress).ToList();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="accountNumber"></param>
+        /// <param name="amount"></param>
+        /// <exception cref="ArgumentOutOfRangeException">ArgumentOutOfRangeException</exception>
+        public static void Deposit(int accountNumber, decimal amount)
+        {
+            var account = db.Accounts.Where(a => a.AccountNumber == accountNumber).FirstOrDefault();
+            if (account == null)
+                return;
+            account.Deposit(amount);
+
+            var transaction = new Transaction
+            {
+                TransactionDate = DateTime.UtcNow,
+                TypeOfTransaction = TransactionType.Credit,
+                Description = "Branch Deposit",
+                Amount = amount,
+                AccountNumber = account.AccountNumber
+            };
+
+            // save to db
+            db.Transactions.Add(transaction);
+            db.SaveChanges();
+        }
+
+
+        public static void Withdraw(int accountNumber, decimal amount)
+        {
+            try
+            {
+                Account account = GetAccountByAccountNumber(accountNumber);
+                account.Deposit(amount);
+
+                var transaction = new Transaction
+                {
+                    TransactionDate = DateTime.UtcNow,
+                    TypeOfTransaction = TransactionType.Debit,
+                    Description = "Branch Withdrawl",
+                    Amount = amount,
+                    AccountNumber = account.AccountNumber
+                };
+
+                // save to db
+                db.Transactions.Add(transaction);
+                db.SaveChanges();
+            }
+            catch
+            {
+                // normally would log exception here 
+                // and re-throw up to next level
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="accountNumber"></param>
+        /// <returns></returns>
+        private static Account GetAccountByAccountNumber(int accountNumber)
+        {
+            var account = db.Accounts.Where(a => a.AccountNumber == accountNumber).FirstOrDefault();
+            if (account == null)
+               throw new ArgumentOutOfRangeException($"Invalid Account Number Provided: {accountNumber}");
+            return account;
+        }
+
+        public static List<Transaction> GetAllTransactions(int accountNumber)
+        {
+            return db.Transactions.Where(t => t.AccountNumber == accountNumber).OrderByDescending(t => t.TransactionDate).ToList();
+        }
+
+
     }
 }

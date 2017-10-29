@@ -52,17 +52,54 @@ namespace BankApp
                         Console.WriteLine($"Account Number: {account.AccountNumber}, Account Type: {account.AccountType}, Balance: {account.Balance}, Created Date: {account.CreatedDate}");
                         break;
                     case "2":
+                        PrintAllAccounts();
+                        try
+                        {
+                            Console.Write("Account Number: ");
+                            var acctNumber = Convert.ToInt32(Console.ReadLine());
+                            Console.Write("Amount to deposit: ");
+                            amount = Convert.ToDecimal(Console.ReadLine());
+                            Bank.Deposit(acctNumber, amount);
+
+                            Console.WriteLine($"{amount} deposited to account {acctNumber}");
+                        }
+                        catch(FormatException)
+                        {
+                            Console.WriteLine("Either account number or amount is invalid");
+                        }
+                        catch(OverflowException)
+                        {
+                            Console.WriteLine("Either account number or amount is beyond the allowed range.");
+                        }
+                        catch(ArgumentOutOfRangeException ax)
+                        {
+                            Console.WriteLine(ax.Message);
+                        }
+                        catch(Exception)
+                        {
+                            Console.WriteLine("Oops!  Something went wrong; please try again");
+                        }
                         break;
                     case "3":
+                        PrintAllAccounts();
+                        Console.Write("Account Number: ");
+                        var accountNumber = Convert.ToInt32(Console.ReadLine());
+                        Console.Write("Amount to withdraw: ");
+                        amount = Convert.ToDecimal(Console.ReadLine());
+                        Bank.Withdraw(accountNumber, amount);
+                        Console.WriteLine($"{amount} withdrawn from account {accountNumber}");
                         break;
                     case "4":
-                        Console.Write("Email Address: ");
-                        emailAddress = Console.ReadLine();
-                        var accounts = Bank.GetAllAccounts(emailAddress);
-                        foreach (var item in accounts)
+                        PrintAllAccounts();
+                        break;
+                    case "5":
+                        PrintAllAccounts();
+                        Console.Write("Account Number: ");
+                        accountNumber = Convert.ToInt32(Console.ReadLine());
+                        var transactions = Bank.GetAllTransactions(accountNumber);
+                        foreach (var tran in transactions)
                         {
-                            Console.WriteLine($"Account Number: {item.AccountNumber}, Account Type: {item.AccountType}, Balance: {item.Balance}, Created Date: {item.CreatedDate}");
-
+                            Console.WriteLine($"Id: {tran.TransactionId}, Date: {tran.TransactionDate}, Type: {tran.TypeOfTransaction}, Amount: {tran.Amount}, Description: {tran.Description}");
                         }
                         break;
                     default:
@@ -72,6 +109,17 @@ namespace BankApp
             }
 
 
+        }
+
+        private static void PrintAllAccounts()
+        {
+            Console.Write("Email Address: ");
+            var emailAddress = Console.ReadLine();
+            var accounts = Bank.GetAllAccounts(emailAddress);
+            foreach (var item in accounts)
+            {
+                Console.WriteLine($"Account Number: {item.AccountNumber}, Account Type: {item.AccountType}, Balance: {item.Balance}, Created Date: {item.CreatedDate}");
+            }
         }
     }
     

@@ -32,6 +32,7 @@ namespace BankApp
         [Required]
         public TypeOfAccount AccountType { get; set; }
         public DateTime CreatedDate { get; set; }
+        public virtual ICollection<Transaction> Transactions { get; set; }
         #endregion
 
         #region Methods
@@ -48,10 +49,12 @@ namespace BankApp
             CreatedDate = DateTime.UtcNow;
         }
         #endregion
-
         public void Withdraw(decimal amount)
         {
+            if (amount > Balance)
+                throw new ArgumentOutOfRangeException("amount", "Insufficient funds for withdrawl");
 
+            Balance -= amount;
         }
         #endregion
     }
