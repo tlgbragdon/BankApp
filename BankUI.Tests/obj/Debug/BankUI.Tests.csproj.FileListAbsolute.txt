@@ -72,6 +72,7 @@ D:\source\repos\BankApp\BankUI.Tests\bin\Debug\Microsoft.Owin.Security.dll
 D:\source\repos\BankApp\BankUI.Tests\bin\Debug\Owin.dll
 D:\source\repos\BankApp\BankUI.Tests\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
 D:\source\repos\BankApp\BankUI.Tests\bin\Debug\EntityFramework.dll
+D:\source\repos\BankApp\BankUI.Tests\bin\Debug\BankApp.dll
 D:\source\repos\BankApp\BankUI.Tests\bin\Debug\Microsoft.Owin.Security.Cookies.dll
 D:\source\repos\BankApp\BankUI.Tests\bin\Debug\Microsoft.Owin.Host.SystemWeb.dll
 D:\source\repos\BankApp\BankUI.Tests\bin\Debug\BankUI.pdb
@@ -92,6 +93,8 @@ D:\source\repos\BankApp\BankUI.Tests\bin\Debug\Microsoft.AspNet.Identity.Owin.xm
 D:\source\repos\BankApp\BankUI.Tests\bin\Debug\Microsoft.Owin.Security.xml
 D:\source\repos\BankApp\BankUI.Tests\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
 D:\source\repos\BankApp\BankUI.Tests\bin\Debug\EntityFramework.xml
+D:\source\repos\BankApp\BankUI.Tests\bin\Debug\BankApp.pdb
+D:\source\repos\BankApp\BankUI.Tests\bin\Debug\BankApp.dll.config
 D:\source\repos\BankApp\BankUI.Tests\bin\Debug\Microsoft.Owin.Security.Cookies.xml
 D:\source\repos\BankApp\BankUI.Tests\bin\Debug\Microsoft.Owin.Host.SystemWeb.xml
 D:\source\repos\BankApp\BankUI.Tests\obj\Debug\BankUI.Tests.csprojResolveAssemblyReference.cache

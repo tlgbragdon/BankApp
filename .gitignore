@@ -71,3 +71,7 @@ Properties/*
 /BankApp/bin/*
 /BankApp/obj/*
 /BankApp/Properties/*
+
+/BankUI/bin/*
+/BankUI/obj/*
+/BankUI/Properties/*

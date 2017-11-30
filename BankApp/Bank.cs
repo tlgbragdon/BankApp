@@ -77,7 +77,7 @@ namespace BankApp
             try
             {
                 Account account = GetAccountByAccountNumber(accountNumber);
-                account.Deposit(amount);
+                account.Withdraw(amount);
 
                 var transaction = new Transaction
                 {
@@ -105,11 +105,11 @@ namespace BankApp
         /// </summary>
         /// <param name="accountNumber"></param>
         /// <returns></returns>
-        private static Account GetAccountByAccountNumber(int accountNumber)
+        public static Account GetAccountByAccountNumber(int accountNumber)
         {
             var account = db.Accounts.Where(a => a.AccountNumber == accountNumber).FirstOrDefault();
             if (account == null)
-               throw new ArgumentOutOfRangeException($"Invalid Account Number Provided: {accountNumber}");
+                throw new InvalidAccountException();
             return account;
         }
 
@@ -118,6 +118,33 @@ namespace BankApp
             return db.Transactions.Where(t => t.AccountNumber == accountNumber).OrderByDescending(t => t.TransactionDate).ToList();
         }
 
+        public static void EditAccount(Account account)
+        {
+            var oldAccount = GetAccountByAccountNumber(account.AccountNumber);
+            db.Entry(oldAccount).State = System.Data.Entity.EntityState.Modified;
+            oldAccount.AccountType = account.AccountType;
+            db.SaveChanges();
+        }
 
+        public static void DeleteAccount(Account account)
+        {
+            // first withdraw any existing funds
+            // TODO: should this be a transfer to antoher account instead?
+            var balance = account.Balance;
+            account.Withdraw(balance);
+
+            // delete account (this is actually a soft delete)
+            account.Delete();
+
+            db.SaveChanges();
+
+        }
+    }
+
+    public class InvalidAccountException : Exception
+    {
+        public InvalidAccountException() : base("Invalid Account Number")
+        {
+        }
     }
 }
