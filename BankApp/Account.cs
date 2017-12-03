@@ -30,8 +30,8 @@ namespace BankApp
         public decimal Balance { get; set; }  // only this class can set the balance
         [Required]
         public TypeOfAccount AccountType { get; set; }
-        public DateTime CreatedDate { get; private set; }
-        public bool IsActive { get; private set; }
+        public DateTime CreatedDate { get; set; }
+        public bool IsActive { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
         #endregion
 

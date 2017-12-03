@@ -120,16 +120,20 @@ namespace BankApp
 
         public static void EditAccount(Account account)
         {
+            // find account (row in db) to update
             var oldAccount = GetAccountByAccountNumber(account.AccountNumber);
+            // mark that we are modifiying this row
             db.Entry(oldAccount).State = System.Data.Entity.EntityState.Modified;
+            // make updates to row
             oldAccount.AccountType = account.AccountType;
+            // save changes
             db.SaveChanges();
         }
 
         public static void DeleteAccount(Account account)
         {
             // first withdraw any existing funds
-            // TODO: should this be a transfer to antoher account instead?
+            // TODO: should this be a transfer to another account instead?
             var balance = account.Balance;
             account.Withdraw(balance);
 

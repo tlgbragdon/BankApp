@@ -12,8 +12,7 @@ namespace BankUI.Controllers
 {
     public class AccountsController : Controller
     {
-        private BankModel db = new BankModel();
-
+ 
         // GET: Accounts
         [Authorize]
         public ActionResult Index()
@@ -75,10 +74,10 @@ namespace BankUI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Account account = Bank.GetAccountByAccountNumber(id.Value);  //id is a nullable type which isn't allowed in our factory method, so get Value
-            if (account == null)
-            {
-                return HttpNotFound();
-            }
+            //if (account == null)
+            //{
+            //    return HttpNotFound();
+            //}
             return View(account);
         }
 
@@ -205,11 +204,14 @@ namespace BankUI.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            using (var db = new BankModel())
             {
-                db.Dispose();
+                if (disposing)
+                {
+                    db.Dispose();
+                }
+                base.Dispose(disposing);
             }
-            base.Dispose(disposing);
         }
     }
 }
